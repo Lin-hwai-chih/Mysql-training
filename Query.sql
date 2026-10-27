@@ -1,0 +1,7 @@
+SHOW DATABASES;
+
+CREATE DATABASE mydb;
+
+DROP DATABASE mydb;
+
+USE mydb;
