@@ -24,4 +24,16 @@ INSERT INTO product (name) VALUES ('青茶');
 
 SELECT * FROM product;
 
+SELECT * FROM product WHERE price = 45;
+
+SELECT * FROM product WHERE price < 40;
+
+SELECT * FROM product WHERE price <> 50;
+
+SELECT * FROM product WHERE price <> 50 and name = '美式';
+
+SELECT * FROM product WHERE price = 30 or name = '奶茶';
+
+SELECT * FROM product WHERE name = '青茶';
+
 DROP TABLE product;
