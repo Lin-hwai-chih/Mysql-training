@@ -36,4 +36,22 @@ SELECT * FROM product WHERE price = 30 or name = '奶茶';
 
 SELECT * FROM product WHERE name = '青茶';
 
+SELECT name, price FROM product WHERE price = 45;
+
+SELECT id, name, price FROM product WHERE price = 45;
+
+SET SQL_SAFE_UPDATES = 0;
+
+UPDATE product SET price = 50 WHERE name = '奶茶';
+
+UPDATE product SET name = '文山青茶', price = 25 WHERE id = 6;
+
+UPDATE product SET price = 35 WHERE price <= 35;
+
+UPDATE product SET price = 60;
+
+DELETE FROM product WHERE name = '奶綠';
+
+DELETE FROM product;
+
 DROP TABLE product;
