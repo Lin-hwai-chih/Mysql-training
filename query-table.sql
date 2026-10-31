@@ -4,54 +4,44 @@ USE mydb;
 
 SHOW TABLES;
 
-CREATE Table product (
+CREATE TABLE products (
     id INT PRIMARY KEY AUTO_INCREMENT,
-    name VARCHAR(255) NOT NULL,
-    price INT NOT NULL DEFAULT 30
+    name VARCHAR(255) NOT NULL
 );
 
-INSERT INTO product (id, name, price) VALUES (1, '拿鐵', 50);
+CREATE TABLE variant (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    products_id INT,
+    size VARCHAR(2) NOT NULL,
+    price INT NOT NULL DEFAULT 30
+)
 
-INSERT INTO product (id, name, price) VALUES (2, '美式', 40);
+INSERT INTO products (name) VALUES ('美式');
 
-INSERT INTO product (id, name, price) VALUES (3, '奶茶', 45);
+INSERT INTO products (name) VALUES ('拿鐵');
 
-INSERT INTO product (name, price) VALUES ('綠茶', 30);
+INSERT INTO products (name) VALUES ('奶茶');
 
-INSERT INTO product (name, price) VALUES ('奶綠', 45);
+SELECT * FROM products;
 
-INSERT INTO product (name) VALUES ('青茶');
+INSERT INTO variant (products_id, size, price) VALUES (1, '中杯', 40);
 
-SELECT * FROM product;
+INSERT INTO variant (products_id, size, price) VALUES (1, '大杯', 50);
 
-SELECT * FROM product WHERE price = 45;
+INSERT INTO variant (products_id, size, price) VALUES (2, '中杯', 50);
 
-SELECT * FROM product WHERE price < 40;
+INSERT INTO variant (products_id, size, price) VALUES (2, '大杯', 60);
 
-SELECT * FROM product WHERE price <> 50;
+INSERT INTO variant (products_id, size, price) VALUES (3, '中杯', 45);
 
-SELECT * FROM product WHERE price <> 50 and name = '美式';
+INSERT INTO variant (products_id, size, price) VALUES (3, '大杯', 55);
 
-SELECT * FROM product WHERE price = 30 or name = '奶茶';
+SELECT * FROM variant;
 
-SELECT * FROM product WHERE name = '青茶';
+SELECT *
+FROM products
+    INNER JOIN variant ON products.id = variant.products_id
 
-SELECT name, price FROM product WHERE price = 45;
-
-SELECT id, name, price FROM product WHERE price = 45;
-
-SET SQL_SAFE_UPDATES = 0;
-
-UPDATE product SET price = 50 WHERE name = '奶茶';
-
-UPDATE product SET name = '文山青茶', price = 25 WHERE id = 6;
-
-UPDATE product SET price = 35 WHERE price <= 35;
-
-UPDATE product SET price = 60;
-
-DELETE FROM product WHERE name = '奶綠';
-
-DELETE FROM product;
-
-DROP TABLE product;
+SELECT products.name, variant.size, variant.price
+FROM products
+    INNER JOIN variant ON products.id = variant.products_id
